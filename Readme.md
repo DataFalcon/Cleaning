@@ -1,4 +1,4 @@
-Readme.md
+
 
 The script file "run_analysis.R" provided in this repo takes the "Human Activity Recognition Using Smartphones" Data Set and reduces it to include only mean values of key feature vectors.  The means are taken over subject (one of 30 volunteers ages 19-48), and activity (one of six simple activities: walking, walking upstairs, walking downstairs, sitting, standing or lying down (called "laying" in the data set).
 
