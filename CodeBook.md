@@ -68,7 +68,7 @@ The next page lists the complete set of feature vectors provided in the reduced 
 
 
 The complete (reduced) set of feature vectors is as follows:
-
+<pre><code>
  [1] tBodyAcc_mean_X               	tBodyAcc_mean_Y              
  [3] tBodyAcc_mean_Z               	tBodyAcc_std_X               
  [5] tBodyAcc_std_Y                	tBodyAcc_std_Z               
@@ -109,7 +109,7 @@ The complete (reduced) set of feature vectors is as follows:
 [75] fBodyBodyGyroMag_std          	fBodyBodyGyroMag_meanFreq    
 [77] fBodyBodyGyroJerkMag_mean     	fBodyBodyGyroJerkMag_std     
 [79] fBodyBodyGyroJerkMag_meanFreq
-
+</code></pre>
 
 
 
