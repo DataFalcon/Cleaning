@@ -1,5 +1,5 @@
 
-CodeBook.md
+#CodeBook.md
 
 Reduced Data Set from:
 Human Activity Recognition Using Smartphones Dataset (HAR)
@@ -16,6 +16,7 @@ DITEN - Università degli Studi di Genova, Genoa (I-16145), Italy.
 2. - CETpD - Technical Research Centre for Dependency Care and Autonomous Living
 Universitat Politècnica de Catalunya (BarcelonaTech). Vilanova i la Geltrú (08800), Spain
 activityrecognition '@' smartlab.ws
+++++
 
 More information on the original data set can be found in the UCI repository.  Here we just describe the variables in the reduced data set and how they relate to the original.
 
@@ -45,7 +46,7 @@ Thus "tBodyAcc_mean_X" is the mean for the X component of the time domain measur
 
 As compared to the original data set, the featurevector names have been cleaned up to include only alpha characters and underscores but are otherwise unaltered ( ".", "()" and "," have been substituted).
 
-The original data set has 813,621 on 561 variables and is divided arbitrarily into test and training subsets. (see Appendix for more details).
+The original data set has 813,621 observations on 561 variables and is divided arbitrarily into test and training subsets. (see Appendix for more details).
 
 The reduced data set was obtained by combining test and training subsets and subsetting to only those variables that represented the mean and the standard deviation of time series and their fourier transforms (79 of the 561 original variables).  The data set was further reduced by taking the mean of all observations for a particular subject performing a particular task.  This is what is represented in the "meanvalue" column for each variable in the "featurevector" column.
   
@@ -68,45 +69,45 @@ The next page lists the complete set of feature vectors provided in the reduced 
 
 The complete (reduced) set of feature vectors is as follows:
 
- [1] tBodyAcc_mean_X               tBodyAcc_mean_Y              
- [3] tBodyAcc_mean_Z               tBodyAcc_std_X               
- [5] tBodyAcc_std_Y                tBodyAcc_std_Z               
- [7] tGravityAcc_mean_X            tGravityAcc_mean_Y           
- [9] tGravityAcc_mean_Z            tGravityAcc_std_X            
-[11] tGravityAcc_std_Y             tGravityAcc_std_Z            
-[13] tBodyAccJerk_mean_X           tBodyAccJerk_mean_Y          
-[15] tBodyAccJerk_mean_Z           tBodyAccJerk_std_X           
-[17] tBodyAccJerk_std_Y            tBodyAccJerk_std_Z           
-[19] tBodyGyro_mean_X              tBodyGyro_mean_Y             
-[21] tBodyGyro_mean_Z              tBodyGyro_std_X              
-[23] tBodyGyro_std_Y               tBodyGyro_std_Z              
-[25] tBodyGyroJerk_mean_X          tBodyGyroJerk_mean_Y         
-[27] tBodyGyroJerk_mean_Z          tBodyGyroJerk_std_X          
-[29] tBodyGyroJerk_std_Y           tBodyGyroJerk_std_Z          
-[31] tBodyAccMag_mean              tBodyAccMag_std              
-[33] tGravityAccMag_mean           tGravityAccMag_std           
-[35] tBodyAccJerkMag_mean          tBodyAccJerkMag_std          
-[37] tBodyGyroMag_mean             tBodyGyroMag_std             
-[39] tBodyGyroJerkMag_mean         tBodyGyroJerkMag_std         
-[41] fBodyAcc_mean_X               fBodyAcc_mean_Y              
-[43] fBodyAcc_mean_Z               fBodyAcc_std_X               
-[45] fBodyAcc_std_Y                fBodyAcc_std_Z               
-[47] fBodyAcc_meanFreq_X           fBodyAcc_meanFreq_Y          
-[49] fBodyAcc_meanFreq_Z           fBodyAccJerk_mean_X          
-[51] fBodyAccJerk_mean_Y           fBodyAccJerk_mean_Z          
-[53] fBodyAccJerk_std_X            fBodyAccJerk_std_Y           
-[55] fBodyAccJerk_std_Z            fBodyAccJerk_meanFreq_X      
-[57] fBodyAccJerk_meanFreq_Y       fBodyAccJerk_meanFreq_Z      
-[59] fBodyGyro_mean_X              fBodyGyro_mean_Y             
-[61] fBodyGyro_mean_Z              fBodyGyro_std_X              
-[63] fBodyGyro_std_Y               fBodyGyro_std_Z              
-[65] fBodyGyro_meanFreq_X          fBodyGyro_meanFreq_Y         
-[67] fBodyGyro_meanFreq_Z          fBodyAccMag_mean             
-[69] fBodyAccMag_std               fBodyAccMag_meanFreq         
-[71] fBodyBodyAccJerkMag_mean      fBodyBodyAccJerkMag_std      
-[73] fBodyBodyAccJerkMag_meanFreq  fBodyBodyGyroMag_mean        
-[75] fBodyBodyGyroMag_std          fBodyBodyGyroMag_meanFreq    
-[77] fBodyBodyGyroJerkMag_mean     fBodyBodyGyroJerkMag_std     
+ [1] tBodyAcc_mean_X               	tBodyAcc_mean_Y              
+ [3] tBodyAcc_mean_Z               	tBodyAcc_std_X               
+ [5] tBodyAcc_std_Y                	tBodyAcc_std_Z               
+ [7] tGravityAcc_mean_X            	tGravityAcc_mean_Y           
+ [9] tGravityAcc_mean_Z            	tGravityAcc_std_X            
+[11] tGravityAcc_std_Y             	tGravityAcc_std_Z            
+[13] tBodyAccJerk_mean_X           	tBodyAccJerk_mean_Y          
+[15] tBodyAccJerk_mean_Z           	tBodyAccJerk_std_X           
+[17] tBodyAccJerk_std_Y            	tBodyAccJerk_std_Z           
+[19] tBodyGyro_mean_X              	tBodyGyro_mean_Y             
+[21] tBodyGyro_mean_Z              	tBodyGyro_std_X              
+[23] tBodyGyro_std_Y               	tBodyGyro_std_Z              
+[25] tBodyGyroJerk_mean_X          	tBodyGyroJerk_mean_Y         
+[27] tBodyGyroJerk_mean_Z          	tBodyGyroJerk_std_X          
+[29] tBodyGyroJerk_std_Y           	tBodyGyroJerk_std_Z          
+[31] tBodyAccMag_mean              	tBodyAccMag_std              
+[33] tGravityAccMag_mean           	tGravityAccMag_std           
+[35] tBodyAccJerkMag_mean          	tBodyAccJerkMag_std          
+[37] tBodyGyroMag_mean             	tBodyGyroMag_std             
+[39] tBodyGyroJerkMag_mean         	tBodyGyroJerkMag_std         
+[41] fBodyAcc_mean_X               	fBodyAcc_mean_Y              
+[43] fBodyAcc_mean_Z               	fBodyAcc_std_X               
+[45] fBodyAcc_std_Y                	fBodyAcc_std_Z               
+[47] fBodyAcc_meanFreq_X           	fBodyAcc_meanFreq_Y          
+[49] fBodyAcc_meanFreq_Z           	fBodyAccJerk_mean_X          
+[51] fBodyAccJerk_mean_Y           	fBodyAccJerk_mean_Z          
+[53] fBodyAccJerk_std_X            	fBodyAccJerk_std_Y           
+[55] fBodyAccJerk_std_Z            	fBodyAccJerk_meanFreq_X      
+[57] fBodyAccJerk_meanFreq_Y       	fBodyAccJerk_meanFreq_Z      
+[59] fBodyGyro_mean_X              	fBodyGyro_mean_Y             
+[61] fBodyGyro_mean_Z              	fBodyGyro_std_X              
+[63] fBodyGyro_std_Y               	fBodyGyro_std_Z              
+[65] fBodyGyro_meanFreq_X          	fBodyGyro_meanFreq_Y         
+[67] fBodyGyro_meanFreq_Z          	fBodyAccMag_mean             
+[69] fBodyAccMag_std               	fBodyAccMag_meanFreq         
+[71] fBodyBodyAccJerkMag_mean      	fBodyBodyAccJerkMag_std      
+[73] fBodyBodyAccJerkMag_meanFreq  	fBodyBodyGyroMag_mean        
+[75] fBodyBodyGyroMag_std          	fBodyBodyGyroMag_meanFreq    
+[77] fBodyBodyGyroJerkMag_mean     	fBodyBodyGyroJerkMag_std     
 [79] fBodyBodyGyroJerkMag_meanFreq
 
 
@@ -120,7 +121,7 @@ The complete (reduced) set of feature vectors is as follows:
 
 
 
-## Appendix 1
+# Appendix 1
 ================================================================
 Human Activity Recognition Using Smartphones Dataset
 Version 1.0
@@ -192,10 +193,10 @@ Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012
 
 
 
-## Appendix 2 
+# Appendix 2 
 (from the UCR Machine Learning Repository, see the acknowledgment at the beginning of this file).
 
-### Feature Selection 
+## Feature Selection 
 =================
 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
