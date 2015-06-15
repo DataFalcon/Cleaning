@@ -156,7 +156,7 @@ names(ActSubjAvg)[4] <- "meanvalue"
 names(ActSubjAvg)[3] <- "featurevector"
 
 writeURL <- "getdata-projectfiles-UCI HAR Dataset/Project.txt"
-write.table(ActSubjAvg, file = writeURL, row.name = FALSE, append = FALSE, eol = "\r\n")
+write.table(ActSubjAvg, file = writeURL, row.name = FALSE, quote = FALSE, append = FALSE, eol = "\r\n")
 
 # The first few lines of this data frame look very similar to the previous one, however the size has been reduced from 813,621 rows
 # to only 14,220 rows because of averaging.  It is essential that the value column be labled differently from the data frame in 4
