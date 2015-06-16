@@ -20,99 +20,47 @@ activityrecognition '@' smartlab.ws
 
 More information on the original data set can be found in the UCI repository.  Here we just describe the variables in the reduced data set and how they relate to the original.
 
-The script in this repository, run_analysis.R, produces the following text file with 14,220 observations on 4 variables (first 10 observations shown):
-
-          subject           activity   featurevector meanvalue
-       1        1             LAYING tBodyAcc_mean_X 0.2215982
-       2        1            SITTING tBodyAcc_mean_X 0.2612376
-       3        1           STANDING tBodyAcc_mean_X 0.2789176
-       4        1            WALKING tBodyAcc_mean_X 0.2773308
-       5        1 WALKING_DOWNSTAIRS tBodyAcc_mean_X 0.2891883
-       6        1   WALKING_UPSTAIRS tBodyAcc_mean_X 0.2554617
-       7        2             LAYING tBodyAcc_mean_X 0.2813734
-       8        2            SITTING tBodyAcc_mean_X 0.2770874
-       9        2           STANDING tBodyAcc_mean_X 0.2779115
-       10       2            WALKING tBodyAcc_mean_X 0.2764266
-
+The script in this repository, run_analysis.R, produces the following text file with 14,220 observations on 7 variables (first 10 observations shown):
+<pre><code>
+> head(SmartPhonedf, 10)
+   subject           activity domain rootVector axis moment meanvalue
+1        1             LAYING   time    BodyAcc    x   mean 0.2215982
+2        1            SITTING   time    BodyAcc    x   mean 0.2612376
+3        1           STANDING   time    BodyAcc    x   mean 0.2789176
+4        1            WALKING   time    BodyAcc    x   mean 0.2773308
+5        1 WALKING_DOWNSTAIRS   time    BodyAcc    x   mean 0.2891883
+6        1   WALKING_UPSTAIRS   time    BodyAcc    x   mean 0.2554617
+7        2             LAYING   time    BodyAcc    x   mean 0.2813734
+8        2            SITTING   time    BodyAcc    x   mean 0.2770874
+9        2           STANDING   time    BodyAcc    x   mean 0.2779115
+10       2            WALKING   time    BodyAcc    x   mean 0.2764266
+</code></pre>
 A detailed account of how the original data was obtained is attached (Appendix 1) and details on how features were selected from the raw data is also attached (Appendix 2).
 
-In brief there were 30 subjects in the study (numbered 1-30 in the "subject" column of the data file) and each was asked to perform 6 different activities (descriptor in the "activity" column) while wearing a cell phone.  Accelerometer measurements were taken on 3 axes.  These were used to obtain body acceleration and body rotation.  They were taken at a rate fast enough to also detect "jerk".  Each of these measurements produced a time series from which frequency data could be obtained through a fourier transform.  The variables (featurevector) thus take the form:
+In brief there were 30 subjects in the study (numbered 1-30 in the "subject" column of the data file) and each was asked to perform 6 different activities (descriptor in the "activity" column) while wearing a cell phone.  Accelerometer measurements were taken on 3 axes.  These were used to obtain body acceleration and body rotation.  They were taken at a rate fast enough to also detect "jerk".  Each of these measurements produced a time series from which frequency data could be obtained through a fourier transform.  The variables in the original data table take the form:
 
 (t or f)(BodyAcc or BodyGyro)_(mean or std)_(X or Y or Z or Mag)
 
-Where the first parentheses refer to time or frequency domain, the second set of parenthesis refer to either acceleration or rotation, the third prenthesis refers to whether it was the mean of the time series data or it's std deviation and X,Y,Z or Mag refer to the axis or absolute magnitude of the vector.
+Where the first parentheses refer to time or frequency domain, the second set of parentheses refer to either acceleration or rotation, the third prentheses refers to whether it was the mean of the data or it's std deviation and X,Y,Z or Mag refer to the axis or absolute magnitude of the vector.
 
 Thus "tBodyAcc_mean_X" is the mean for the X component of the time domain measurement of body acceleration.
 
-As compared to the original data set, the featurevector names have been cleaned up to include only alpha characters and underscores but are otherwise unaltered ( ".", "()" and "," have been substituted).
+We have separated the 4 variables that are confounded in the feature vectors for easier analysis.  We have also explicitly indicated "time" and "frequency" in the domain variable.
 
 The original data set has 813,621 observations on 561 variables and is divided arbitrarily into test and training subsets. (see Appendix for more details).
 
-The reduced data set was obtained by combining test and training subsets and subsetting to only those variables that represented the mean and the standard deviation of time series and their fourier transforms (79 of the 561 original variables).  The data set was further reduced by taking the mean of all observations for a particular subject performing a particular task.  This is what is represented in the "meanvalue" column for each variable in the "featurevector" column.
+The reduced data set was obtained by combining test and training subsets and subsetting to only those variables that represented the mean and the standard deviation of time series and their fourier transforms (79 of the 561 original variables).  The data set was further reduced by taking the mean of all observations for a particular subject performing a particular task.  This is what is represented in the "meanvalue" column for each combination of the feature variables.
   
-Thus the triplet (subject, activity, featurevector) represents a unique row in the dataset.
+Each line has a unique set of: subject, activity, domain, rootVector, axis and moment.
 
-The next page lists the complete set of feature vectors provided in the reduced data set (a total of 79 out of the 561 in the original data).
+The possible values for each id variable are as follows:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-The complete (reduced) set of feature vectors is as follows:
-<pre><code>
- [1] tBodyAcc_mean_X               	tBodyAcc_mean_Y              
- [3] tBodyAcc_mean_Z               	tBodyAcc_std_X               
- [5] tBodyAcc_std_Y                	tBodyAcc_std_Z               
- [7] tGravityAcc_mean_X            	tGravityAcc_mean_Y           
- [9] tGravityAcc_mean_Z            	tGravityAcc_std_X            
-[11] tGravityAcc_std_Y             	tGravityAcc_std_Z            
-[13] tBodyAccJerk_mean_X           	tBodyAccJerk_mean_Y          
-[15] tBodyAccJerk_mean_Z           	tBodyAccJerk_std_X           
-[17] tBodyAccJerk_std_Y            	tBodyAccJerk_std_Z           
-[19] tBodyGyro_mean_X              	tBodyGyro_mean_Y             
-[21] tBodyGyro_mean_Z              	tBodyGyro_std_X              
-[23] tBodyGyro_std_Y               	tBodyGyro_std_Z              
-[25] tBodyGyroJerk_mean_X          	tBodyGyroJerk_mean_Y         
-[27] tBodyGyroJerk_mean_Z          	tBodyGyroJerk_std_X          
-[29] tBodyGyroJerk_std_Y           	tBodyGyroJerk_std_Z          
-[31] tBodyAccMag_mean              	tBodyAccMag_std              
-[33] tGravityAccMag_mean           	tGravityAccMag_std           
-[35] tBodyAccJerkMag_mean          	tBodyAccJerkMag_std          
-[37] tBodyGyroMag_mean             	tBodyGyroMag_std             
-[39] tBodyGyroJerkMag_mean         	tBodyGyroJerkMag_std         
-[41] fBodyAcc_mean_X               	fBodyAcc_mean_Y              
-[43] fBodyAcc_mean_Z               	fBodyAcc_std_X               
-[45] fBodyAcc_std_Y                	fBodyAcc_std_Z               
-[47] fBodyAcc_meanFreq_X           	fBodyAcc_meanFreq_Y          
-[49] fBodyAcc_meanFreq_Z           	fBodyAccJerk_mean_X          
-[51] fBodyAccJerk_mean_Y           	fBodyAccJerk_mean_Z          
-[53] fBodyAccJerk_std_X            	fBodyAccJerk_std_Y           
-[55] fBodyAccJerk_std_Z            	fBodyAccJerk_meanFreq_X      
-[57] fBodyAccJerk_meanFreq_Y       	fBodyAccJerk_meanFreq_Z      
-[59] fBodyGyro_mean_X              	fBodyGyro_mean_Y             
-[61] fBodyGyro_mean_Z              	fBodyGyro_std_X              
-[63] fBodyGyro_std_Y               	fBodyGyro_std_Z              
-[65] fBodyGyro_meanFreq_X          	fBodyGyro_meanFreq_Y         
-[67] fBodyGyro_meanFreq_Z          	fBodyAccMag_mean             
-[69] fBodyAccMag_std               	fBodyAccMag_meanFreq         
-[71] fBodyBodyAccJerkMag_mean      	fBodyBodyAccJerkMag_std      
-[73] fBodyBodyAccJerkMag_meanFreq  	fBodyBodyGyroMag_mean        
-[75] fBodyBodyGyroMag_std          	fBodyBodyGyroMag_meanFreq    
-[77] fBodyBodyGyroJerkMag_mean     	fBodyBodyGyroJerkMag_std     
-[79] fBodyBodyGyroJerkMag_meanFreq
-</code></pre>
-
-
-
+* subject: 1 to 30 inclusive
+* activity: "LAYING", "SITTING", "STANDING", "WALKING", "WALKING_DOWNSTAIRS" and "WALKING_UPSTAIRS"
+* domain: "time" or "frequency"
+* rootVector: "BodyAcc", "BodyGyro", "GravityAcc",  "BodyGyroJerk", "BodyAccJerk"
+* axis: x, y, z, mag
+* moment: mean, std, or meanfreq
 
 
 
