@@ -32,6 +32,8 @@ The script does the following to the 6 column files and column name file:
 
 9. Use the "dcast" function in R to average (using mean) the data values over subject and activity producing a vertical data frame called "ActSubjAvg" with 30*6 = 180 rows for each featurevector.
 
-10. Write the ActSubjAvg data frame to a text file called "Project.txt".
+10. Parse the featurevector column into its 4 constituent variables and cbind the new columns "domain", "rootVector", "axis" and "moment" to the ActSubjAvg data frame.
+
+11. Select the columns in the final order (leaving out the old featurevector) and write the resulting data frame (SmartPhonedf) to a txt file: SmartPhone2.txt
 
 More detailed documentation is provided in the R script.
