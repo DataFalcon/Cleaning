@@ -155,8 +155,6 @@ ActSubjAvg <- melt(BothMean, id=c("subject", "activity"), measure.vars = measure
 names(ActSubjAvg)[4] <- "meanvalue"
 names(ActSubjAvg)[3] <- "featurevector"
 
-writeURL <- "getdata-projectfiles-UCI HAR Dataset/Project.txt"
-write.table(ActSubjAvg, file = writeURL, row.name = FALSE, append = FALSE, eol = "\r\n")
 
 # The first few lines of this data frame look very similar to the previous one, however the size has been reduced from 813,621 rows
 # to only 14,220 rows because of averaging.  It is essential that the value column be labled differently from the data frame in 4
@@ -173,4 +171,93 @@ write.table(ActSubjAvg, file = writeURL, row.name = FALSE, append = FALSE, eol =
 #       8        2            SITTING tBodyAcc_mean_X 0.2770874
 #       9        2           STANDING tBodyAcc_mean_X 0.2779115
 #       10       2            WALKING tBodyAcc_mean_X 0.2764266
+
+
+# Notice however that this data frame does NOT meet the requirements of tidy data
+# the featurevector column has 4 variables in it, not just one
+# these variables are: domain(t or f, time or frequency), moment(mean or std), axis(X,Y,Z or MAG)
+# and the root measurement (e.g. "BodyAcc")
+
+# we now need to parse this inot its constituent variables
+
+domain <- as.character(ActSubjAvg$featurevector)
+len <- length(domain)
+for(i in 1:len){
+    if(grepl("^t", domain[i])){
+        domain[i] <- "time"
+    }
+    else if(grepl("^f", domain[i])){
+        domain[i] <- "frequency"
+    }
+    else {domain[i] <- "NA"}
+}
+
+axis <- as.character(ActSubjAvg$featurevector)
+len <- length(axis)
+for(i in 1:len){
+    if(grepl("_X", axis[i])){
+        axis[i] <- "x"
+    }
+    else if(grepl("_Y", axis[i])){
+        axis[i] <- "y"
+    }
+    else if(grepl("_Z", axis[i])){
+        axis[i] <- "z"
+    }
+    else if(grepl("Mag_", axis[i])){
+        axis[i] <- "mag"
+    }
+    else {axis[i] <- "NA"}
+}
+
+moment <- as.character(ActSubjAvg$featurevector)
+len <- length(moment)
+for(i in 1:len){
+    if(grepl("_meanFreq", moment[i])){
+        moment[i] <- "meanfreq"
+    }
+    else if(grepl("_mean", moment[i])){
+        moment[i] <- "mean"
+    }
+    else if(grepl("_std", moment[i])){
+        moment[i] <- "std"
+    }
+    else {momentis[i] <- "NA"}
+}
+
+rootVar <- c("BodyGyro", "BodyAcc", "GravityAcc",  "BodyGyroJerk", "BodyAccJerk" )
+
+rootVector <- as.character(ActSubjAvg$featurevector)
+len <- length(rootVector)
+for(i in 1:len){
+    foundmatch <- FALSE
+    for(j in 1:5){
+        if(grepl(rootVar[j], ActSubjAvg$featurevector[i])){
+            rootVector[i] <- rootVar[j]
+            foundmatch <- TRUE
+        }
+        if(!foundmatch){rootVector[i] <- "NA"}
+    }
+}
+
+
+SmartPhonedf <- cbind(ActSubjAvg, domain, axis, moment, rootVector)
+SmartPhonedf <- select(SmartPhonedf, subject, activity, domain, rootVector, axis, moment, meanvalue)
+
+writeURL <- "getdata-projectfiles-UCI HAR Dataset/SmartPhone2.txt"
+write.table(SmartPhonedf, file = writeURL, row.name = FALSE, append = FALSE, eol = "\r\n")
+
+# Now the data frame looks like this:
+#   subject           activity domain rootVector axis moment meanvalue
+#1        1             LAYING   time    BodyAcc    x   mean 0.2215982
+#2        1            SITTING   time    BodyAcc    x   mean 0.2612376
+#3        1           STANDING   time    BodyAcc    x   mean 0.2789176
+#4        1            WALKING   time    BodyAcc    x   mean 0.2773308
+#5        1 WALKING_DOWNSTAIRS   time    BodyAcc    x   mean 0.2891883
+#6        1   WALKING_UPSTAIRS   time    BodyAcc    x   mean 0.2554617
+#7        2             LAYING   time    BodyAcc    x   mean 0.2813734
+#8        2            SITTING   time    BodyAcc    x   mean 0.2770874
+#9        2           STANDING   time    BodyAcc    x   mean 0.2779115
+#10       2            WALKING   time    BodyAcc    x   mean 0.2764266
+
 # ************************  This satisfies point 5 of the assignment ***********************************************
